@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* App Content */}
-        <div className="flex-1 overflow-y-auto flex flex-col relative scrollbar-hide">
+        <div className="flex-1 overflow-y-auto flex flex-col relative scrollbar-hide pb-20">
             {/* Header / Nav */}
             <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-xl border-b border-border/40">
                 <div className="px-5 h-16 flex items-center justify-between">
@@ -43,15 +43,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         </span>
                     </a>
                   </Link>
-
-                  {/* Desktop-like nav links (hidden in phone view usually, but requested in PRD) */}
-                  {/* Since we are in phone mode, we'll keep the top clean and rely on bottom nav, 
-                      but maybe add a small profile or settings icon if needed later. 
-                      For now, just the logo looks cleanest. */}
                 </div>
             </header>
 
-            <main className="flex-1 px-5 py-6 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-24">
+            <main className="flex-1 px-4 py-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 {children}
             </main>
         </div>
