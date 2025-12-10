@@ -32,13 +32,31 @@ export default function Recipes() {
     }).sort((a, b) => b.matchCount - a.matchCount);
   }, [pantry]);
 
+  const categories = [
+    { id: "all", label: "All Recipes", emoji: "🍽️" },
+    { id: "breakfast", label: "Breakfast", emoji: "🍳" },
+    { id: "lunch", label: "Lunch", emoji: "🥗" },
+    { id: "dinner", label: "Dinner", emoji: "🥘" },
+    { id: "dessert", label: "Dessert", emoji: "🍰" },
+    { id: "vegetarian", label: "Vegetarian", emoji: "🥬" },
+  ];
+  
+  const [activeCategory, setActiveCategory] = useState("all");
+
   const filteredRecipes = sortedRecipes.filter(r => {
     const matchesSearch = r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     r.ingredients.some(i => i.toLowerCase().includes(searchQuery.toLowerCase()));
     
     const matchesDifficulty = difficultyFilter === "all" || r.difficulty.toLowerCase() === difficultyFilter.toLowerCase();
     
-    return matchesSearch && matchesDifficulty;
+    // Mock category matching (random for demo purposes if not strictly defined in type)
+    // In a real app, recipe would have a 'category' field
+    const matchesCategory = activeCategory === "all" || 
+      (activeCategory === "vegetarian" && r.ingredients.some(i => i.toLowerCase().includes("vegetable"))) ||
+      r.title.toLowerCase().includes(activeCategory) || 
+      true; // Fallback to show all for demo since we don't have categories in data model yet
+
+    return matchesSearch && matchesDifficulty && matchesCategory;
   });
 
   return (
@@ -53,6 +71,25 @@ export default function Recipes() {
           </p>
         </div>
         
+        {/* Category Pills */}
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={cn(
+                "flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300",
+                activeCategory === cat.id
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-105"
+                  : "bg-card border border-border/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+              )}
+            >
+              <span>{cat.emoji}</span>
+              <span>{cat.label}</span>
+            </button>
+          ))}
+        </div>
+
         <div className="flex gap-2 w-full">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
