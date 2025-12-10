@@ -53,41 +53,45 @@ export default function RecipeDetail() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
         
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-          <div className="flex items-center gap-2 mb-2">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl leading-tight text-shadow-sm">
+            {recipe.title}
+          </h1>
+        </div>
+      </div>
+      
+      {/* Recipe Meta Info & Description */}
+      <div className="px-4 mb-8">
+         <div className="flex justify-between items-start gap-4 mb-4">
+            <p className="text-sm font-medium text-muted-foreground leading-relaxed flex-1">
+              {recipe.description}
+            </p>
+            <Button 
+              onClick={() => toggleSaveRecipe(recipe)}
+              size="sm"
+              className={cn(
+                "shrink-0 rounded-full h-10 px-5 font-bold text-xs shadow-md transition-all duration-300 active:scale-95",
+                saved 
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-primary/20" 
+                  : "bg-card text-foreground border border-border/50 hover:bg-muted"
+              )}
+            >
+              <Heart className={cn("mr-1.5 h-4 w-4", saved && "fill-current")} />
+              {saved ? "Saved" : "Save"}
+            </Button>
+         </div>
+
+         <div className="flex items-center gap-3">
             <span className={cn(
-              "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide border border-white/20 backdrop-blur-md",
-              recipe.difficulty === 'Easy' ? "bg-green-500/80" : 
-              recipe.difficulty === 'Medium' ? "bg-yellow-500/80" : "bg-red-500/80"
+              "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border",
+              recipe.difficulty === 'Easy' ? "bg-green-100 text-green-700 border-green-200" : 
+              recipe.difficulty === 'Medium' ? "bg-yellow-100 text-yellow-700 border-yellow-200" : "bg-red-100 text-red-700 border-red-200"
             )}>
               {recipe.difficulty}
             </span>
-            <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-white/20 backdrop-blur-md border border-white/20">
-              <Clock className="h-3 w-3" /> {recipe.prepTime} min
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-secondary text-secondary-foreground border border-secondary-foreground/10">
+              <Clock className="h-3.5 w-3.5" /> {recipe.prepTime} min
             </span>
-          </div>
-          
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl leading-tight mb-2 text-shadow-sm">
-            {recipe.title}
-          </h1>
-
-          <p className="text-sm font-medium text-white/90 line-clamp-2 mb-4 leading-relaxed max-w-[90%] drop-shadow-sm">
-            {recipe.description}
-          </p>
-          
-          <Button 
-            onClick={() => toggleSaveRecipe(recipe)}
-            size="sm"
-            className={cn(
-              "rounded-full h-10 px-5 font-bold text-xs shadow-lg backdrop-blur-md border transition-all duration-300 active:scale-95",
-              saved 
-                ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90" 
-                : "bg-white/20 text-white border-white/40 hover:bg-white/30"
-            )}
-          >
-            <Heart className={cn("mr-1.5 h-4 w-4", saved && "fill-current")} />
-            {saved ? "Saved" : "Save Recipe"}
-          </Button>
-        </div>
+         </div>
       </div>
 
       <div className="space-y-8 px-1">
