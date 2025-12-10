@@ -89,12 +89,14 @@ export default function Recipes() {
         
         {/* Category Pills */}
         <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide -mx-4 px-4 snap-x">
-          {categories.map((cat) => (
+          {categories.map((cat, idx) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
                 "snap-start flex items-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 border",
+                idx === 0 && "ml-1",
+                idx === categories.length - 1 && "mr-1",
                 activeCategory === cat.id
                   ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25 scale-105"
                   : "bg-card border-border/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground hover:border-border"

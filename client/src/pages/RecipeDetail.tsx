@@ -66,9 +66,13 @@ export default function RecipeDetail() {
             </span>
           </div>
           
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl leading-tight mb-4 text-shadow-sm">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl leading-tight mb-2 text-shadow-sm">
             {recipe.title}
           </h1>
+
+          <p className="text-sm font-medium text-white/90 line-clamp-2 mb-4 leading-relaxed max-w-[90%] drop-shadow-sm">
+            {recipe.description}
+          </p>
           
           <Button 
             onClick={() => toggleSaveRecipe(recipe)}

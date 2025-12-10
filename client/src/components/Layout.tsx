@@ -36,10 +36,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="px-5 h-16 flex items-center justify-between">
                   <Link href="/">
                     <a className="flex items-center gap-2 group">
-                        <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary/20 transition-colors">
-                            <ChefHat className="h-6 w-6 text-primary" />
+                        <div className="bg-primary/20 p-2 rounded-xl group-hover:bg-primary/30 transition-colors">
+                            <ChefHat className="h-6 w-6 text-primary stroke-[2.5px]" />
                         </div>
-                        <span className="font-heading font-bold text-xl tracking-tight text-foreground">
+                        <span className="font-heading font-extrabold text-xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">
                             CookMate
                         </span>
                     </a>
