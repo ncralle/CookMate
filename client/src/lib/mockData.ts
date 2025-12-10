@@ -4,6 +4,12 @@ import stirFryImg from '@assets/stock_images/vegetable_stir_fry_6d0c31cf.jpg';
 import toastImg from '@assets/stock_images/avocado_toast_with_e_9e60481d.jpg';
 import chiliImg from '@assets/stock_images/hearty_bean_chili_83ce1bc4.jpg';
 import potatoesImg from '@assets/stock_images/roasted_potatoes_efa3fcce.jpg';
+import spinachPastaImg from '@assets/stock_images/creamy_spinach_pasta_f18cca8a.jpg';
+import lemonChickenImg from '@assets/stock_images/lemon_garlic_chicken_fc5a0707.jpg';
+import riceBowlImg from '@assets/stock_images/rice_bowl_with_veget_e14feb74.jpg';
+import tunaSaladImg from '@assets/stock_images/tuna_salad_c8c896e6.jpg';
+import tomatoPastaImg from '@assets/stock_images/tomato_pasta_0c4eeb9f.jpg';
+import parfaitImg from '@assets/stock_images/yogurt_parfait_with__4bc66f04.jpg';
 
 export const mockRecipes: Recipe[] = [
   {
@@ -83,6 +89,97 @@ export const mockRecipes: Recipe[] = [
       'Toss potatoes with melted butter, minced garlic, and salt.',
       'Roast for 30-35 minutes until golden brown, flipping halfway.',
       'Garnish with fresh parsley.'
+    ]
+  },
+  {
+    id: '10',
+    title: 'Creamy Spinach Pasta',
+    description: 'A comforting, creamy pasta perfect for busy nights.',
+    image: spinachPastaImg,
+    prepTime: 20,
+    difficulty: 'Easy',
+    ingredients: ['Pasta', 'Spinach', 'Cream', 'Garlic'],
+    instructions: [
+      'Boil pasta according to package instructions.',
+      'In a separate pan, sauté minced garlic and spinach until wilted.',
+      'Add cream and simmer for 2-3 minutes until slightly thickened.',
+      'Combine sauce with drained pasta and serve.'
+    ]
+  },
+  {
+    id: '11',
+    title: 'Lemon Garlic Chicken',
+    description: 'Bright, flavorful chicken made with pantry staples.',
+    image: lemonChickenImg,
+    prepTime: 30,
+    difficulty: 'Easy',
+    ingredients: ['Chicken', 'Lemon', 'Garlic', 'Salt', 'Pepper'],
+    instructions: [
+      'Season chicken breasts generously with salt and pepper.',
+      'Heat oil in a pan over medium-high heat.',
+      'Pan-sear chicken for 6-7 minutes per side until golden and cooked through.',
+      'Add minced garlic and cook for 1 minute.',
+      'Finish with fresh lemon juice and serve.'
+    ]
+  },
+  {
+    id: '12',
+    title: 'Rice Bowl with Veggies',
+    description: 'A customizable bowl using whatever you have.',
+    image: riceBowlImg,
+    prepTime: 15,
+    difficulty: 'Easy',
+    ingredients: ['Rice', 'Carrot', 'Onion', 'Soy Sauce'],
+    instructions: [
+      'Cook rice according to package instructions.',
+      'Dice carrots and onions.',
+      'Stir-fry veggies in a hot pan until tender.',
+      'Serve veggies over rice and drizzle with soy sauce.'
+    ]
+  },
+  {
+    id: '13',
+    title: 'Quick Tuna Salad',
+    description: 'Protein-packed lunch with only a few ingredients.',
+    image: tunaSaladImg,
+    prepTime: 5,
+    difficulty: 'Easy',
+    ingredients: ['Tuna', 'Mayo', 'Lemon', 'Salt'],
+    instructions: [
+      'Drain tuna and place in a bowl.',
+      'Mix with mayonnaise and a squeeze of lemon juice.',
+      'Season with salt to taste.',
+      'Serve on bread, crackers, or over greens.'
+    ]
+  },
+  {
+    id: '14',
+    title: 'One-Pot Tomato Pasta',
+    description: 'Everything cooks together for max flavor and minimal dishes.',
+    image: tomatoPastaImg,
+    prepTime: 18,
+    difficulty: 'Easy',
+    ingredients: ['Pasta', 'Tomatoes', 'Garlic', 'Olive Oil'],
+    instructions: [
+      'Add pasta, diced tomatoes, minced garlic, and olive oil to a large pot.',
+      'Add enough water to just cover the ingredients.',
+      'Bring to a boil and cook until pasta is al dente and water has reduced to a sauce.',
+      'Stir well and serve hot.'
+    ]
+  },
+  {
+    id: '15',
+    title: 'Greek Yogurt Parfait',
+    description: 'A simple breakfast with fruit and crunch.',
+    image: parfaitImg,
+    prepTime: 3,
+    difficulty: 'Easy',
+    ingredients: ['Yogurt', 'Fruit', 'Honey', 'Granola'],
+    instructions: [
+      'Add a layer of yogurt to a glass or bowl.',
+      'Add a layer of fresh or frozen fruit.',
+      'Top with granola and a drizzle of honey.',
+      'Repeat layers if desired and serve immediately.'
     ]
   }
 ];
