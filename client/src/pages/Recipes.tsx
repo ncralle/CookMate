@@ -42,13 +42,13 @@ export default function Recipes() {
   });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-2">
+          <h1 className="font-heading font-bold text-2xl md:text-4xl text-foreground mb-1 md:mb-2">
             Suggested Recipes
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-sm md:text-base text-muted-foreground">
             Based on your {pantry.length} pantry items
           </p>
         </div>
@@ -60,7 +60,7 @@ export default function Recipes() {
               placeholder="Search recipes..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 rounded-xl bg-card border-border/50"
+              className="pl-9 h-11 md:h-12 rounded-xl bg-card border-border/50 text-sm md:text-base"
             />
           </div>
           
@@ -70,7 +70,7 @@ export default function Recipes() {
                 variant="outline" 
                 size="icon" 
                 className={cn(
-                  "rounded-xl shrink-0 transition-colors", 
+                  "rounded-xl h-11 w-11 md:h-12 md:w-12 shrink-0 transition-colors", 
                   difficultyFilter !== "all" && "bg-primary/10 text-primary border-primary/20"
                 )}
               >
@@ -91,9 +91,11 @@ export default function Recipes() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 pb-4">
         {filteredRecipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <div key={recipe.id} className="mx-auto w-full max-w-[95%] sm:max-w-none">
+            <RecipeCard recipe={recipe} />
+          </div>
         ))}
       </div>
       

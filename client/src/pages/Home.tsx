@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="space-y-12 pb-12">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-[2.5rem] bg-stone-900 text-white shadow-xl">
+      <section className="relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-stone-900 text-white shadow-xl mx-1 md:mx-0">
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
@@ -19,36 +19,36 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
         </div>
         
-        <div className="relative z-10 px-8 py-16 md:px-12 md:py-20 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6">
+        <div className="relative z-10 px-6 py-10 md:px-12 md:py-20 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 md:mb-6">
             <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-            <span className="text-xs font-medium tracking-wide uppercase text-white/90">Reduce Waste, Cook Better</span>
+            <span className="text-[10px] md:text-xs font-medium tracking-wide uppercase text-white/90">Reduce Waste, Cook Better</span>
           </div>
           
-          <h1 className="font-heading font-extrabold text-4xl md:text-6xl leading-[1.1] mb-6 tracking-tight">
+          <h1 className="font-heading font-extrabold text-3xl md:text-6xl leading-tight md:leading-[1.1] mb-4 md:mb-6 tracking-tight pr-4">
             Turn your pantry into <span className="text-primary-foreground">dinner.</span>
           </h1>
           
-          <p className="text-lg text-white/80 mb-8 max-w-lg leading-relaxed">
+          <p className="text-base md:text-lg text-white/80 mb-6 md:mb-8 max-w-lg leading-relaxed pr-2">
             Don't know what to cook? Tell us what ingredients you have, and we'll find delicious recipes you can make right now.
           </p>
           
           <Link href="/recipes">
-            <Button size="lg" className="rounded-full px-8 h-14 text-base font-bold bg-primary hover:bg-primary/90 text-primary-foreground border-0 shadow-lg shadow-primary/20 transition-transform hover:scale-105 active:scale-95">
-              Find Recipes <ArrowRight className="ml-2 h-5 w-5" />
+            <Button size="lg" className="rounded-full px-6 h-12 md:px-8 md:h-14 text-sm md:text-base font-bold bg-primary hover:bg-primary/90 text-primary-foreground border-0 shadow-lg shadow-primary/20 transition-transform hover:scale-105 active:scale-95">
+              Find Recipes <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
             </Button>
           </Link>
         </div>
       </section>
 
       {/* Pantry Section */}
-      <section className="max-w-3xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="font-heading font-bold text-3xl text-foreground mb-3">What's in your kitchen?</h2>
-          <p className="text-muted-foreground">Add ingredients you have on hand to get personalized suggestions.</p>
+      <section className="max-w-3xl mx-auto px-2 md:px-0">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-2 md:mb-3">What's in your kitchen?</h2>
+          <p className="text-sm md:text-base text-muted-foreground">Add ingredients you have on hand to get personalized suggestions.</p>
         </div>
         
-        <div className="bg-card rounded-[2rem] p-8 shadow-sm border border-border/50">
+        <div className="bg-card rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-8 shadow-sm border border-border/50">
           <div className="flex flex-col items-center">
             <IngredientInput />
             <div className="w-full">

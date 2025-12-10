@@ -60,11 +60,11 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
             </div>
           </div>
           
-          <div className="p-4 flex flex-col flex-1">
-            <h3 className="font-heading font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
+          <div className="p-4 md:p-5 flex flex-col flex-1">
+            <h3 className="font-heading font-bold text-base md:text-lg leading-tight mb-1 md:mb-2 group-hover:text-primary transition-colors line-clamp-2">
               {recipe.title}
             </h3>
-            <p className="text-muted-foreground text-sm line-clamp-2 mb-4 flex-1">
+            <p className="text-muted-foreground text-xs md:text-sm line-clamp-2 mb-3 md:mb-4 flex-1">
               {recipe.description}
             </p>
             
