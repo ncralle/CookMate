@@ -3,24 +3,29 @@ import RecipeCard from "@/components/RecipeCard";
 import { BookHeart } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import AddRecipeDialog from "@/components/AddRecipeDialog";
 
 export default function Cookbook() {
   const { savedRecipes } = useStore();
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center gap-4">
-        <div className="p-3 bg-red-100 text-red-600 rounded-2xl">
-          <BookHeart className="h-8 w-8" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-red-100 text-red-600 rounded-2xl">
+            <BookHeart className="h-8 w-8" />
+          </div>
+          <div>
+            <h1 className="font-heading font-bold text-3xl md:text-4xl text-foreground">
+              My Cookbook
+            </h1>
+            <p className="text-muted-foreground">
+              {savedRecipes.length} saved recipes
+            </p>
+          </div>
         </div>
-        <div>
-          <h1 className="font-heading font-bold text-3xl md:text-4xl text-foreground">
-            My Cookbook
-          </h1>
-          <p className="text-muted-foreground">
-            {savedRecipes.length} saved recipes
-          </p>
-        </div>
+        
+        <AddRecipeDialog />
       </div>
 
       {savedRecipes.length === 0 ? (

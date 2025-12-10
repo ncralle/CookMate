@@ -11,6 +11,7 @@ interface AppState {
   addIngredient: (name: string) => void;
   removeIngredient: (id: string) => void;
   toggleSaveRecipe: (recipe: Recipe) => void;
+  addCustomRecipe: (recipe: Recipe) => void;
   isSaved: (id: string) => boolean;
 }
 
@@ -33,6 +34,9 @@ export const useStore = create<AppState>()(
           return { savedRecipes: [...state.savedRecipes, recipe] };
         }
       }),
+      addCustomRecipe: (recipe) => set((state) => ({
+        savedRecipes: [...state.savedRecipes, recipe]
+      })),
       isSaved: (id) => get().savedRecipes.some(r => r.id === id),
     }),
     {

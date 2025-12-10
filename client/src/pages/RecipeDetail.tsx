@@ -11,9 +11,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 export default function RecipeDetail() {
   const [, params] = useRoute("/recipe/:id");
   const id = params?.id;
-  const recipe = mockRecipes.find((r) => r.id === id);
   
-  const { toggleSaveRecipe, isSaved, pantry } = useStore();
+  const { toggleSaveRecipe, isSaved, pantry, savedRecipes } = useStore();
+  
+  // Find recipe in mock data OR saved custom recipes
+  const recipe = mockRecipes.find((r) => r.id === id) || savedRecipes.find((r) => r.id === id);
+  
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
   if (!recipe) return <div className="p-8 text-center">Recipe not found</div>;
