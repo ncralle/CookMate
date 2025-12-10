@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { ChefHat, BookHeart, Home, Search, Battery, Wifi, Signal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SettingsDialog from "./SettingsDialog";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -43,6 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         </span>
                     </a>
                   </Link>
+                  <SettingsDialog />
                 </div>
             </header>
 
