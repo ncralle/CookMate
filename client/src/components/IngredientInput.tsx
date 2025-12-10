@@ -17,20 +17,21 @@ export default function IngredientInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3 w-full max-w-md">
-      <div className="relative flex-1">
+    <form onSubmit={handleSubmit} className="flex gap-2 w-full max-w-md items-center">
+      <div className="relative flex-1 group">
         <Input
           type="text"
-          placeholder="Add an ingredient (e.g., Eggs, Rice)..."
+          placeholder="Add an ingredient (e.g. Eggs)..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="pr-10 h-12 rounded-2xl border-border bg-card shadow-sm focus-visible:ring-primary/20 text-base"
+          className="h-12 rounded-full border-border bg-card/50 shadow-sm focus-visible:ring-primary/20 text-base pl-5 transition-all focus:bg-card"
         />
       </div>
       <Button 
         type="submit" 
         disabled={!value.trim()}
-        className="h-12 w-12 rounded-2xl p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
+        size="icon"
+        className="h-12 w-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 shrink-0"
       >
         <Plus className="h-6 w-6" />
         <span className="sr-only">Add</span>

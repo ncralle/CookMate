@@ -1,0 +1,53 @@
+Please polish this app’s UI so it looks clean, modern, and market-ready, without changing any existing functionality or breaking navigation.
+
+Focus on visual design and UX only:
+
+1. Overall Theme & Layout
+
+Create a cohesive visual style that fits a friendly cooking/recipe brand (like “CookMate”).
+
+Use a light, warm color palette with 1 primary accent color and 1 secondary accent color.
+
+Choose 1–2 modern, readable fonts and apply consistent font sizes, weights, and hierarchy for headings, body text, and buttons.
+
+Add generous spacing, padding, and alignment so everything feels airy and intentional.
+
+Make sure the layout is fully responsive on desktop and mobile.
+
+2. Navigation & Header
+
+Add a simple top navigation bar with the app logo/name and links/tabs for: My Pantry, Recipes, and My Cookbook.
+
+Keep the nav sticky on scroll on desktop if it makes sense.
+
+3. Recipe Cards & Lists
+
+Redesign recipe cards to look clean and professional: clear image area, title, short description, time, difficulty pill/badge, and “View Recipe” button.
+
+Add subtle hover states on cards and buttons (slight shadow, scale, or border change).
+
+Make sure text never overlaps and is easily readable on all screen sizes.
+
+4. Detail Views & Forms
+
+For the recipe detail page, clearly separate sections: title, metadata (time + difficulty), ingredients list, and numbered steps.
+
+For the “Add New Recipe” form in My Cookbook, style the inputs and labels so they are easy to scan and use. Group related fields and align everything neatly.
+
+Make primary actions (like Save Recipe, Add to Cookbook, Find Recipes) visually prominent.
+
+5. My Pantry & My Cookbook Pages
+
+Style the ingredient input and list so it feels simple and approachable for beginners.
+
+In My Cookbook, present saved recipes in the same polished card style as the main recipe list, with consistent spacing and alignment.
+
+6. Accessibility & Polish
+
+Ensure good color contrast for text and buttons.
+
+Use consistent border-radius, shadows, and button styles across the app.
+
+Add basic focus styles for keyboard navigation.
+
+Please keep the overall structure of the components and routes the same so nothing breaks; just refactor the CSS/styling, layout, and small UI elements to match this vision. When you’re done, explain briefly which main files you updated for styling.

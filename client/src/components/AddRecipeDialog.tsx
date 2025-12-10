@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus } from "lucide-react";
+import { Plus, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AddRecipeDialog() {
@@ -76,100 +76,118 @@ export default function AddRecipeDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="rounded-full gap-2">
-          <Plus className="h-4 w-4" /> Add New Recipe
+        <Button className="rounded-full gap-2 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+          <Plus className="h-4 w-4" /> Add Recipe
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>Add Custom Recipe</DialogTitle>
-          <DialogDescription>
-            Create a new recipe to save to your cookbook.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="name">Recipe Name</Label>
-            <Input
-              id="name"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="e.g. Grandma's Apple Pie"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              required
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              placeholder="Short summary of the dish..."
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
+      <DialogContent className="sm:max-w-[425px] max-h-[85vh] overflow-y-auto rounded-[2rem] p-0 gap-0">
+        <div className="px-6 pt-6 pb-4 border-b border-border/40 bg-muted/20">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-heading">Add Custom Recipe</DialogTitle>
+            <DialogDescription>
+              Create a new recipe to save to your cookbook.
+            </DialogDescription>
+          </DialogHeader>
+        </div>
+        
+        <form onSubmit={handleSubmit} className="px-6 py-4 space-y-6">
+          <div className="space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="difficulty">Difficulty</Label>
-              <Select 
-                value={formData.difficulty} 
-                onValueChange={(value) => setFormData({ ...formData, difficulty: value })}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Easy">Easy</SelectItem>
-                  <SelectItem value="Medium">Medium</SelectItem>
-                  <SelectItem value="Hard">Hard</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="time">Time (min)</Label>
+              <Label htmlFor="name" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Recipe Name</Label>
               <Input
-                id="time"
-                type="number"
+                id="name"
                 required
-                value={formData.time}
-                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                placeholder="e.g. 30"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="e.g. Grandma's Apple Pie"
+                className="rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all"
               />
             </div>
+            
+            <div className="grid gap-2">
+              <Label htmlFor="description" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Description</Label>
+              <Textarea
+                id="description"
+                required
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                placeholder="Short summary of the dish..."
+                className="rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all resize-none"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="difficulty" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Difficulty</Label>
+                <Select 
+                  value={formData.difficulty} 
+                  onValueChange={(value) => setFormData({ ...formData, difficulty: value })}
+                >
+                  <SelectTrigger className="rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Easy">Easy</SelectItem>
+                    <SelectItem value="Medium">Medium</SelectItem>
+                    <SelectItem value="Hard">Hard</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="time" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Time (min)</Label>
+                <Input
+                  id="time"
+                  type="number"
+                  required
+                  value={formData.time}
+                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                  placeholder="e.g. 30"
+                  className="rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="ingredients" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Ingredients</Label>
+              <Textarea
+                id="ingredients"
+                required
+                value={formData.ingredients}
+                onChange={(e) => setFormData({ ...formData, ingredients: e.target.value })}
+                placeholder="One ingredient per line..."
+                className="min-h-[100px] rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all"
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="steps" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Instructions</Label>
+              <Textarea
+                id="steps"
+                required
+                value={formData.steps}
+                onChange={(e) => setFormData({ ...formData, steps: e.target.value })}
+                placeholder="One step per line..."
+                className="min-h-[100px] rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all"
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="image" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Image URL (Optional)</Label>
+              <div className="relative">
+                <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="image"
+                  value={formData.image}
+                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  placeholder="https://..."
+                  className="pl-9 rounded-xl bg-muted/30 border-transparent focus:bg-background focus:border-primary/20 transition-all"
+                />
+              </div>
+            </div>
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="ingredients">Ingredients (one per line)</Label>
-            <Textarea
-              id="ingredients"
-              required
-              value={formData.ingredients}
-              onChange={(e) => setFormData({ ...formData, ingredients: e.target.value })}
-              placeholder="2 cups flour&#10;1 tsp salt&#10;..."
-              className="min-h-[100px]"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="steps">Steps (one per line)</Label>
-            <Textarea
-              id="steps"
-              required
-              value={formData.steps}
-              onChange={(e) => setFormData({ ...formData, steps: e.target.value })}
-              placeholder="1. Mix dry ingredients&#10;2. Add water&#10;..."
-              className="min-h-[100px]"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="image">Image URL (optional)</Label>
-            <Input
-              id="image"
-              value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
-          <DialogFooter>
-            <Button type="submit">Save Recipe</Button>
+          
+          <DialogFooter className="pt-2">
+            <Button type="submit" size="lg" className="w-full rounded-full font-bold shadow-lg shadow-primary/20">Save to Cookbook</Button>
           </DialogFooter>
         </form>
       </DialogContent>

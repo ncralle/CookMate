@@ -7,8 +7,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { href: "/", label: "Pantry", icon: Home },
-    { href: "/recipes", label: "Find Recipes", icon: Search },
-    { href: "/cookbook", label: "My Cookbook", icon: BookHeart },
+    { href: "/recipes", label: "Recipes", icon: Search },
+    { href: "/cookbook", label: "Cookbook", icon: BookHeart },
   ];
 
   return (
@@ -30,63 +30,63 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* App Content */}
         <div className="flex-1 overflow-y-auto flex flex-col relative scrollbar-hide">
-            {/* Navbar */}
-            <nav className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl">
-                <div className="px-5 h-14 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary/20 transition-colors">
-                        <ChefHat className="h-5 w-5 text-primary" />
-                    </div>
-                    <span className="font-heading font-bold text-lg tracking-tight text-foreground">
-                        CookMate
-                    </span>
-                </Link>
+            {/* Header / Nav */}
+            <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-xl border-b border-border/40">
+                <div className="px-5 h-16 flex items-center justify-between">
+                  <Link href="/">
+                    <a className="flex items-center gap-2 group">
+                        <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary/20 transition-colors">
+                            <ChefHat className="h-6 w-6 text-primary" />
+                        </div>
+                        <span className="font-heading font-bold text-xl tracking-tight text-foreground">
+                            CookMate
+                        </span>
+                    </a>
+                  </Link>
 
-                <div className="flex items-center gap-2">
-                    <Link 
-                    href="/recipes"
-                    className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                    >
-                        <Search className="h-5 w-5" />
-                    </Link>
+                  {/* Desktop-like nav links (hidden in phone view usually, but requested in PRD) */}
+                  {/* Since we are in phone mode, we'll keep the top clean and rely on bottom nav, 
+                      but maybe add a small profile or settings icon if needed later. 
+                      For now, just the logo looks cleanest. */}
                 </div>
-                </div>
-            </nav>
+            </header>
 
             <main className="flex-1 px-5 py-6 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-24">
                 {children}
             </main>
         </div>
 
-        {/* Bottom Tab Bar */}
-        <div className="absolute bottom-0 left-0 right-0 border-t border-border/50 bg-background/90 backdrop-blur-xl px-6 pb-8 pt-3 flex justify-between items-center z-50">
+        {/* Bottom Tab Bar - Mobile Navigation */}
+        <nav className="absolute bottom-0 left-0 right-0 border-t border-border/50 bg-background/90 backdrop-blur-xl px-6 pb-8 pt-3 flex justify-between items-center z-50">
             {navItems.map((item) => {
                 const isActive = location === item.href;
                 return (
-                    <Link 
-                        key={item.href} 
-                        href={item.href}
-                        className={cn(
-                        "flex flex-col items-center gap-1 p-2 rounded-2xl transition-all duration-300 w-20 active:scale-95",
+                    <Link key={item.href} href={item.href}>
+                        <a className={cn(
+                        "flex flex-col items-center gap-1 p-2 rounded-2xl transition-all duration-300 w-20 active:scale-95 group",
                         isActive
                             ? "text-primary"
                             : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                        )}
-                    >
-                        <div className="relative">
-                            <item.icon 
-                                className={cn("h-6 w-6 transition-all duration-300", isActive && "fill-current opacity-20 scale-110")} 
-                                strokeWidth={isActive ? 2.5 : 2} 
-                            />
-                            {isActive && <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />}
-                        </div>
-                        <span className={cn("text-[10px] font-medium transition-colors", isActive ? "text-primary font-bold" : "")}>
-                            {item.label}
-                        </span>
+                        )}>
+                            <div className="relative">
+                                <item.icon 
+                                    className={cn(
+                                        "h-6 w-6 transition-all duration-300", 
+                                        isActive && "fill-current opacity-20 scale-110",
+                                        !isActive && "group-hover:scale-110"
+                                    )} 
+                                    strokeWidth={isActive ? 2.5 : 2} 
+                                />
+                                {isActive && <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />}
+                            </div>
+                            <span className={cn("text-[10px] font-medium transition-colors", isActive ? "text-primary font-bold" : "")}>
+                                {item.label}
+                            </span>
+                        </a>
                     </Link>
                 );
             })}
-        </div>
+        </nav>
         
         {/* Home Indicator (Desktop Simulation Only) */}
         <div className="hidden md:block absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-foreground/10 rounded-full z-[60] pointer-events-none" />
