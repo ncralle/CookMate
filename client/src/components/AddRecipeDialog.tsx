@@ -76,8 +76,10 @@ export default function AddRecipeDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="rounded-full gap-2 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
-          <Plus className="h-4 w-4" /> Add Recipe
+        <Button size="sm" className="rounded-full gap-1.5 h-9 px-4 shadow-sm bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-xs">
+          <Plus className="h-3.5 w-3.5" /> 
+          <span>Add</span>
+          <span className="hidden xs:inline">Recipe</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-h-[85vh] overflow-y-auto rounded-[2rem] p-0 gap-0">

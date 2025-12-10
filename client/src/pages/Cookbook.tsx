@@ -9,34 +9,33 @@ export default function Cookbook() {
   const { savedRecipes } = useStore();
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="p-3 bg-red-100 text-red-600 rounded-2xl">
-            <BookHeart className="h-8 w-8" />
-          </div>
-          <div>
-            <h1 className="font-heading font-bold text-3xl md:text-4xl text-foreground">
-              My Cookbook
-            </h1>
-            <p className="text-muted-foreground">
-              {savedRecipes.length} saved recipes
-            </p>
-          </div>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col">
+          <h1 className="font-heading font-bold text-2xl text-foreground leading-tight">
+            My Cookbook
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            {savedRecipes.length} saved recipes
+          </p>
         </div>
         
-        <AddRecipeDialog />
+        <div className="shrink-0">
+          <AddRecipeDialog />
+        </div>
       </div>
 
       {savedRecipes.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-card rounded-[2rem] border border-dashed border-border">
-          <BookHeart className="h-16 w-16 text-muted-foreground/30 mb-6" />
-          <h2 className="text-xl font-bold text-foreground mb-2">No recipes saved yet</h2>
-          <p className="text-muted-foreground max-w-md mb-8">
-            When you find a recipe you love, click the heart icon to save it here for later.
+        <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-card rounded-[1.5rem] border border-dashed border-border/60">
+          <div className="bg-secondary/50 p-3 rounded-full mb-4">
+            <BookHeart className="h-8 w-8 text-muted-foreground/50" />
+          </div>
+          <h2 className="text-lg font-bold text-foreground mb-1">No recipes yet</h2>
+          <p className="text-sm text-muted-foreground max-w-[200px] mb-6 leading-relaxed">
+            Save recipes you love or add your own creations.
           </p>
           <Link href="/recipes">
-            <Button size="lg" className="rounded-full">
+            <Button className="rounded-full px-6 h-10 text-sm shadow-sm">
               Find Recipes
             </Button>
           </Link>
