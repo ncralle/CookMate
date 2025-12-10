@@ -2,13 +2,24 @@ import { useState, useMemo } from "react";
 import { useStore } from "@/lib/store";
 import { mockRecipes } from "@/lib/mockData";
 import RecipeCard from "@/components/RecipeCard";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search, SlidersHorizontal, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 export default function Recipes() {
   const { pantry } = useStore();
   const [searchQuery, setSearchQuery] = useState("");
+  const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
   
   // Sort recipes by match score
   const sortedRecipes = useMemo(() => {
@@ -21,10 +32,14 @@ export default function Recipes() {
     }).sort((a, b) => b.matchCount - a.matchCount);
   }, [pantry]);
 
-  const filteredRecipes = sortedRecipes.filter(r => 
-    r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    r.ingredients.some(i => i.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  const filteredRecipes = sortedRecipes.filter(r => {
+    const matchesSearch = r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    r.ingredients.some(i => i.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesDifficulty = difficultyFilter === "all" || r.difficulty.toLowerCase() === difficultyFilter.toLowerCase();
+    
+    return matchesSearch && matchesDifficulty;
+  });
 
   return (
     <div className="space-y-8">
@@ -48,9 +63,31 @@ export default function Recipes() {
               className="pl-9 rounded-xl bg-card border-border/50"
             />
           </div>
-          <Button variant="outline" size="icon" className="rounded-xl shrink-0">
-            <SlidersHorizontal className="h-4 w-4" />
-          </Button>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className={cn(
+                  "rounded-xl shrink-0 transition-colors", 
+                  difficultyFilter !== "all" && "bg-primary/10 text-primary border-primary/20"
+                )}
+              >
+                <SlidersHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuLabel>Filter by Difficulty</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup value={difficultyFilter} onValueChange={setDifficultyFilter}>
+                <DropdownMenuRadioItem value="all">All Difficulties</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="easy">Easy</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="medium">Medium</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="hard">Hard</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
@@ -62,7 +99,7 @@ export default function Recipes() {
       
       {filteredRecipes.length === 0 && (
         <div className="text-center py-20">
-          <p className="text-muted-foreground text-lg">No recipes found. Try adding more ingredients to your pantry!</p>
+          <p className="text-muted-foreground text-lg">No recipes found. Try adding more ingredients to your pantry or adjusting filters!</p>
         </div>
       )}
     </div>

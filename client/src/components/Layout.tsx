@@ -16,15 +16,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
               <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary/20 transition-colors">
                 <ChefHat className="h-6 w-6 text-primary" />
               </div>
               <span className="font-heading font-bold text-xl tracking-tight text-foreground">
                 CookMate
               </span>
-            </a>
           </Link>
 
           {/* Desktop Nav */}
@@ -32,18 +30,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => {
               const isActive = location === item.href;
               return (
-                <Link key={item.href} href={item.href}>
-                  <a
-                    className={cn(
-                      "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
-                      isActive
-                        ? "bg-primary text-primary-foreground shadow-sm"
-                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-                    )}
-                  >
+                <Link 
+                  key={item.href} 
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  )}
+                >
                     <item.icon className="h-4 w-4" />
                     {item.label}
-                  </a>
                 </Link>
               );
             })}
@@ -52,10 +50,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Mobile Nav Trigger (hidden for now, simplified) */}
           <div className="md:hidden flex items-center gap-4">
             {/* Simple mobile nav links without hamburger for MVP simplicity */}
-             <Link href="/recipes">
-               <a className="p-2 text-muted-foreground hover:text-primary">
+             <Link 
+               href="/recipes"
+               className="p-2 text-muted-foreground hover:text-primary"
+             >
                  <Search className="h-5 w-5" />
-               </a>
              </Link>
           </div>
         </div>
@@ -70,18 +69,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
          {navItems.map((item) => {
               const isActive = location === item.href;
               return (
-                <Link key={item.href} href={item.href}>
-                  <a
-                    className={cn(
-                      "flex flex-col items-center gap-1 p-2 rounded-lg transition-colors",
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    )}
-                  >
+                <Link 
+                  key={item.href} 
+                  href={item.href}
+                  className={cn(
+                    "flex flex-col items-center gap-1 p-2 rounded-lg transition-colors",
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  )}
+                >
                     <item.icon className="h-5 w-5" />
                     <span className="text-[10px] font-medium">{item.label}</span>
-                  </a>
                 </Link>
               );
             })}

@@ -22,8 +22,10 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
   const matchPercentage = Math.round((matchCount / totalCount) * 100);
 
   return (
-    <Link href={`/recipe/${recipe.id}`}>
-      <a className="block group h-full">
+    <Link 
+      href={`/recipe/${recipe.id}`}
+      className="block group h-full"
+    >
         <article className="flex flex-col h-full overflow-hidden bg-card rounded-3xl border border-border/50 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/20">
           <div className="relative aspect-[4/3] overflow-hidden">
             <img 
@@ -73,7 +75,6 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
             </div>
           </div>
         </article>
-      </a>
     </Link>
   );
 }

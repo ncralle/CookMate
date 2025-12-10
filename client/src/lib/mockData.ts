@@ -1,11 +1,16 @@
 import { Recipe } from './types';
+import pastaImg from '@assets/stock_images/tomato_basil_pasta_e85a390f.jpg';
+import stirFryImg from '@assets/stock_images/vegetable_stir_fry_6d0c31cf.jpg';
+import toastImg from '@assets/stock_images/avocado_toast_with_e_9e60481d.jpg';
+import chiliImg from '@assets/stock_images/hearty_bean_chili_83ce1bc4.jpg';
+import potatoesImg from '@assets/stock_images/roasted_potatoes_efa3fcce.jpg';
 
 export const mockRecipes: Recipe[] = [
   {
     id: '1',
     title: 'Easy Tomato Basil Pasta',
     description: 'A classic 15-minute meal using simple pantry staples.',
-    image: 'https://images.unsplash.com/photo-1598866594230-a7d127dddb18?auto=format&fit=crop&q=80&w=1000',
+    image: pastaImg,
     prepTime: 15,
     difficulty: 'Easy',
     ingredients: ['Pasta', 'Tomato Sauce', 'Basil', 'Olive Oil', 'Garlic'],
@@ -21,7 +26,7 @@ export const mockRecipes: Recipe[] = [
     id: '2',
     title: 'Vegetable Stir-Fry',
     description: 'Use up whatever veggies you have in this quick stir-fry.',
-    image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=1000',
+    image: stirFryImg,
     prepTime: 20,
     difficulty: 'Easy',
     ingredients: ['Rice', 'Carrots', 'Broccoli', 'Soy Sauce', 'Ginger', 'Eggs'],
@@ -38,7 +43,7 @@ export const mockRecipes: Recipe[] = [
     id: '3',
     title: 'Avocado Toast with Egg',
     description: 'A nutritious and filling breakfast or lunch.',
-    image: 'https://images.unsplash.com/photo-1525351484163-7529414395d8?auto=format&fit=crop&q=80&w=1000',
+    image: toastImg,
     prepTime: 10,
     difficulty: 'Easy',
     ingredients: ['Bread', 'Avocado', 'Eggs', 'Salt', 'Pepper', 'Chili Flakes'],
@@ -53,7 +58,7 @@ export const mockRecipes: Recipe[] = [
     id: '4',
     title: 'Hearty Bean Chili',
     description: 'A warm comfort food perfect for cold nights.',
-    image: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&q=80&w=1000',
+    image: chiliImg,
     prepTime: 45,
     difficulty: 'Medium',
     ingredients: ['Beans', 'Tomato Paste', 'Onion', 'Chili Powder', 'Cumin', 'Vegetable Broth'],
@@ -68,7 +73,7 @@ export const mockRecipes: Recipe[] = [
     id: '5',
     title: 'Garlic Butter Roasted Potatoes',
     description: 'Crispy on the outside, fluffy on the inside.',
-    image: 'https://images.unsplash.com/photo-1593560704563-fa44778326e6?auto=format&fit=crop&q=80&w=1000',
+    image: potatoesImg,
     prepTime: 40,
     difficulty: 'Easy',
     ingredients: ['Potatoes', 'Butter', 'Garlic', 'Parsley', 'Salt'],
