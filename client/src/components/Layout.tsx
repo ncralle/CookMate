@@ -86,6 +86,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Home Indicator (Desktop Simulation Only) */}
         <div className="hidden md:block absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-foreground/10 rounded-full z-[60] pointer-events-none" />
 
+        {/* Portal Container for Dialogs */}
+        <div id="app-portal-container" className="absolute inset-0 z-[100] pointer-events-none" />
       </div>
     </div>
   );
