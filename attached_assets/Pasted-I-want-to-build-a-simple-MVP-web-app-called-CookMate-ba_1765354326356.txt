@@ -1,0 +1,39 @@
+I want to build a simple MVP web app called CookMate based on this PRD: an ingredient-based cooking app that generates recipes from what the user already has in their pantry. The target users are students and young adults who want quick, low-stress cooking ideas and to reduce food waste.
+
+For the MVP, please create a responsive web app (React + a simple JS/TS stack is fine) with these core features:
+
+Home / My Pantry page
+
+Let users manually add ingredients (text input with an “Add” button).
+
+Show a list of current pantry ingredients with the ability to remove them.
+
+Recipe Results page
+
+A button like “Find recipes” that generates a list of recipe cards based on the pantry ingredients.
+
+For this MVP, you can hardcode some sample recipes or use a simple mock data file instead of a real API.
+
+Each recipe card should show: recipe name, short description, prep time, difficulty, and a quick summary of how well it “matches” the pantry (for example: “Uses 3 of 5 ingredients”).
+
+Recipe Detail page
+
+When I click a recipe card, open a detail view with: ingredients list, step-by-step instructions, and maybe a simple checkbox or visual way to track steps.
+
+Include a “Save to My Cookbook” button.
+
+My Cookbook page
+
+Show recipes the user has saved.
+
+For now, it’s okay to store saved recipes in local state or localStorage instead of a real database.
+
+Please set up basic navigation between these main views (My Pantry, Recipe Results, Recipe Detail, My Cookbook). The UI doesn’t have to be fancy, but it should be clean, readable, and beginner-friendly, since the app is meant for users who feel overwhelmed by cooking.
+
+Also:
+
+Add a short tagline or description on the main page that explains the goal of CookMate (reducing food waste, cooking from what you already have, and helping beginners feel more confident in the kitchen).
+
+Write clear comments in the code so I can understand the main components and where to expand later.
+
+Once the basic flow works, help me connect the project to a GitHub repository from Replit so I can keep the code synced.
