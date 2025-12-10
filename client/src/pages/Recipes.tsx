@@ -91,10 +91,10 @@ export default function Recipes() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 pb-4">
+      <div className="flex flex-col gap-3 pb-4">
         {filteredRecipes.map((recipe) => (
           <div key={recipe.id} className="w-full">
-            <RecipeCard recipe={recipe} />
+            <RecipeCard recipe={recipe} variant="compact" />
           </div>
         ))}
       </div>

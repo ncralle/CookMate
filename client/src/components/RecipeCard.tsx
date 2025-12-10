@@ -6,9 +6,10 @@ import { useStore } from "@/lib/store";
 
 interface RecipeCardProps {
   recipe: Recipe;
+  variant?: "default" | "compact";
 }
 
-export default function RecipeCard({ recipe }: RecipeCardProps) {
+export default function RecipeCard({ recipe, variant = "default" }: RecipeCardProps) {
   const { pantry } = useStore();
   
   // Simple matching logic
@@ -20,6 +21,63 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
   const matchCount = matchedIngredients.length;
   const totalCount = recipe.ingredients.length;
   const matchPercentage = Math.round((matchCount / totalCount) * 100);
+
+  if (variant === "compact") {
+    return (
+      <Link href={`/recipe/${recipe.id}`}>
+        <a className="block group h-full">
+          <article className="flex bg-card rounded-[1.25rem] border border-border/40 shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20 p-2 gap-3 h-28 overflow-hidden">
+            <div className="relative aspect-square h-full rounded-xl overflow-hidden shrink-0">
+              <img 
+                src={recipe.image} 
+                alt={recipe.title}
+                className="object-cover w-full h-full"
+              />
+              <div className="absolute inset-0 bg-black/10" />
+            </div>
+            
+            <div className="flex flex-col flex-1 py-1 pr-1 min-w-0">
+              <div className="flex justify-between items-start gap-2 mb-1">
+                <h3 className="font-heading font-bold text-sm leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                  {recipe.title}
+                </h3>
+                <div className={cn(
+                  "px-1.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wide shrink-0",
+                  recipe.difficulty === 'Easy' ? "bg-green-100 text-green-700" :
+                  recipe.difficulty === 'Medium' ? "bg-yellow-100 text-yellow-700" :
+                  "bg-red-100 text-red-700"
+                )}>
+                  {recipe.difficulty}
+                </div>
+              </div>
+              
+              <p className="text-muted-foreground text-[10px] line-clamp-2 mb-auto leading-relaxed">
+                {recipe.description}
+              </p>
+              
+              <div className="flex items-center gap-3 mt-2">
+                <div className="flex items-center gap-1 text-muted-foreground">
+                  <Clock className="h-3 w-3" />
+                  <span className="text-[10px] font-medium">{recipe.prepTime}m</span>
+                </div>
+                
+                <div className={cn(
+                  "flex items-center gap-1 text-[10px] font-bold",
+                  matchPercentage > 70 ? "text-primary" : "text-muted-foreground"
+                )}>
+                  <span className={cn(
+                    "w-1.5 h-1.5 rounded-full",
+                    matchPercentage > 70 ? "bg-primary" : "bg-muted-foreground"
+                  )} />
+                  {matchCount}/{totalCount}
+                </div>
+              </div>
+            </div>
+          </article>
+        </a>
+      </Link>
+    );
+  }
 
   return (
     <Link href={`/recipe/${recipe.id}`}>

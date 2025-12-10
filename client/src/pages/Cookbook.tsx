@@ -42,9 +42,11 @@ export default function Cookbook() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-4">
           {savedRecipes.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} />
+            <div key={recipe.id} className="w-full">
+              <RecipeCard recipe={recipe} variant="compact" />
+            </div>
           ))}
         </div>
       )}
