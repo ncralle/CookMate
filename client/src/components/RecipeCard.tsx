@@ -9,8 +9,23 @@ interface RecipeCardProps {
   variant?: "default" | "compact";
 }
 
+// Helper to get consistent pastel background
+const getCardStyle = (id: string) => {
+  const styles = [
+    "bg-orange-50/50 hover:bg-orange-50 hover:border-orange-200/50",
+    "bg-green-50/50 hover:bg-green-50 hover:border-green-200/50", 
+    "bg-yellow-50/50 hover:bg-yellow-50 hover:border-yellow-200/50",
+    "bg-stone-50/50 hover:bg-stone-50 hover:border-stone-200/50",
+    "bg-red-50/50 hover:bg-red-50 hover:border-red-200/50",
+  ];
+  // Use last char of ID as rudimentary hash
+  const index = id.charCodeAt(id.length - 1) % styles.length;
+  return styles[index];
+};
+
 export default function RecipeCard({ recipe, variant = "default" }: RecipeCardProps) {
   const { pantry } = useStore();
+  const cardStyle = getCardStyle(recipe.id);
   
   // Simple matching logic
   const pantryNames = pantry.map(p => p.name.toLowerCase());
@@ -26,7 +41,10 @@ export default function RecipeCard({ recipe, variant = "default" }: RecipeCardPr
     return (
       <Link href={`/recipe/${recipe.id}`}>
         <a className="block group h-full">
-          <article className="flex bg-card rounded-[1.25rem] border border-border/40 shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20 p-2 gap-3 h-28 overflow-hidden">
+          <article className={cn(
+            "flex rounded-[1.25rem] border border-border/40 shadow-sm transition-all duration-300 hover:shadow-md p-2 gap-3 h-28 overflow-hidden",
+            cardStyle
+          )}>
             <div className="relative aspect-square h-full rounded-xl overflow-hidden shrink-0">
               <img 
                 src={recipe.image} 

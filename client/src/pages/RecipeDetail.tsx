@@ -36,127 +36,146 @@ export default function RecipeDetail() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto pb-20">
-      <Link href="/recipes">
-        <a className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-6 transition-colors">
-          <ArrowLeft className="mr-1 h-4 w-4" /> Back to Recipes
-        </a>
-      </Link>
-
-      <div className="bg-card rounded-[2.5rem] overflow-hidden shadow-sm border border-border/50">
-        <div className="relative h-64 md:h-96 w-full">
-          <img 
-            src={recipe.image} 
-            alt={recipe.title} 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-          
-          <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 text-white">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div>
-                <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider mb-3 border border-white/10">
-                  {recipe.difficulty} • {recipe.prepTime} min
-                </span>
-                <h1 className="font-heading font-bold text-3xl md:text-5xl leading-tight">
-                  {recipe.title}
-                </h1>
-              </div>
-              
-              <Button 
-                onClick={() => toggleSaveRecipe(recipe)}
-                className={cn(
-                  "rounded-full h-12 px-6 transition-all duration-300",
-                  saved 
-                    ? "bg-red-500 hover:bg-red-600 text-white border-none" 
-                    : "bg-white/20 hover:bg-white/30 text-white backdrop-blur-md border border-white/30"
-                )}
-              >
-                <Heart className={cn("mr-2 h-5 w-5", saved && "fill-current")} />
-                {saved ? "Saved to Cookbook" : "Save Recipe"}
-              </Button>
-            </div>
+    <div className="w-full pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Header Image Card */}
+      <div className="relative h-[40vh] w-full rounded-[2rem] overflow-hidden shadow-lg mb-6 group">
+        <Link href="/recipes">
+          <a className="absolute top-4 left-4 z-20 bg-background/20 backdrop-blur-md text-white p-2.5 rounded-full hover:bg-background/40 transition-colors border border-white/20">
+            <ArrowLeft className="h-5 w-5" />
+          </a>
+        </Link>
+        
+        <img 
+          src={recipe.image} 
+          alt={recipe.title} 
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        
+        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+          <div className="flex items-center gap-2 mb-2">
+            <span className={cn(
+              "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide border border-white/20 backdrop-blur-md",
+              recipe.difficulty === 'Easy' ? "bg-green-500/80" : 
+              recipe.difficulty === 'Medium' ? "bg-yellow-500/80" : "bg-red-500/80"
+            )}>
+              {recipe.difficulty}
+            </span>
+            <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-white/20 backdrop-blur-md border border-white/20">
+              <Clock className="h-3 w-3" /> {recipe.prepTime} min
+            </span>
           </div>
+          
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl leading-tight mb-4 text-shadow-sm">
+            {recipe.title}
+          </h1>
+          
+          <Button 
+            onClick={() => toggleSaveRecipe(recipe)}
+            size="sm"
+            className={cn(
+              "rounded-full h-10 px-5 font-bold text-xs shadow-lg backdrop-blur-md border transition-all duration-300 active:scale-95",
+              saved 
+                ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90" 
+                : "bg-white/20 text-white border-white/40 hover:bg-white/30"
+            )}
+          >
+            <Heart className={cn("mr-1.5 h-4 w-4", saved && "fill-current")} />
+            {saved ? "Saved" : "Save Recipe"}
+          </Button>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-[1fr_1.5fr] gap-8 p-8 md:p-10">
-          {/* Ingredients Column */}
-          <div>
-            <h2 className="font-heading font-bold text-2xl mb-6 flex items-center gap-2">
-              <span className="bg-secondary p-2 rounded-xl text-secondary-foreground">
+      <div className="space-y-8 px-1">
+        {/* Ingredients Section */}
+        <div className="bg-card rounded-[2rem] p-6 border border-border/50 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-heading font-bold text-xl flex items-center gap-2">
+              <span className="bg-secondary/50 p-1.5 rounded-lg text-secondary-foreground">
                 <ChefHat className="h-5 w-5" />
               </span>
               Ingredients
             </h2>
-            
-            <div className="space-y-3">
-              {recipe.ingredients.map((ingredient, index) => {
-                const hasItem = checkIngredientMatch(ingredient);
-                return (
-                  <div 
-                    key={index} 
-                    className={cn(
-                      "flex items-center gap-3 p-3 rounded-xl transition-colors",
-                      hasItem ? "bg-green-50/50 dark:bg-green-900/10 border border-green-100 dark:border-green-900/30" : "bg-muted/30 border border-transparent"
-                    )}
-                  >
-                    <div className={cn(
-                      "h-2 w-2 rounded-full shrink-0",
-                      hasItem ? "bg-green-500" : "bg-muted-foreground/30"
-                    )} />
-                    <span className={cn("text-sm font-medium", hasItem ? "text-green-900 dark:text-green-100" : "text-muted-foreground")}>
-                      {ingredient}
-                    </span>
-                    {hasItem && <span className="ml-auto text-[10px] font-bold text-green-600 uppercase tracking-wide bg-green-100 px-2 py-0.5 rounded-full">Have</span>}
-                  </div>
-                );
-              })}
-            </div>
+            <span className="text-xs font-medium text-muted-foreground bg-secondary/30 px-2 py-1 rounded-full">
+              {recipe.ingredients.length} items
+            </span>
           </div>
+          
+          <div className="grid gap-2.5">
+            {recipe.ingredients.map((ingredient, index) => {
+              const hasItem = checkIngredientMatch(ingredient);
+              return (
+                <div 
+                  key={index} 
+                  className={cn(
+                    "flex items-center gap-3 p-3 rounded-xl transition-all border",
+                    hasItem 
+                      ? "bg-green-50/80 border-green-100 dark:bg-green-900/20 dark:border-green-900/30" 
+                      : "bg-muted/20 border-transparent"
+                  )}
+                >
+                  <div className={cn(
+                    "flex items-center justify-center h-5 w-5 rounded-full shrink-0 border",
+                    hasItem 
+                      ? "bg-green-500 border-green-600 text-white" 
+                      : "bg-muted border-muted-foreground/30 text-transparent"
+                  )}>
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                  </div>
+                  <span className={cn(
+                    "text-sm font-medium leading-tight", 
+                    hasItem ? "text-green-900 dark:text-green-100" : "text-foreground"
+                  )}>
+                    {ingredient}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-          {/* Instructions Column */}
-          <div>
-            <h2 className="font-heading font-bold text-2xl mb-6 flex items-center gap-2">
-              <span className="bg-primary/10 p-2 rounded-xl text-primary">
-                <Clock className="h-5 w-5" />
-              </span>
-              Instructions
-            </h2>
-            
-            <div className="space-y-6">
-              {recipe.instructions.map((step, index) => {
-                const isCompleted = completedSteps.includes(index);
-                return (
-                  <div 
-                    key={index} 
-                    onClick={() => toggleStep(index)}
-                    className={cn(
-                      "flex gap-4 group cursor-pointer",
-                      isCompleted ? "opacity-50" : "opacity-100"
-                    )}
-                  >
-                    <div className="shrink-0 mt-0.5">
-                      <div className={cn(
-                        "h-8 w-8 rounded-full flex items-center justify-center border-2 transition-all duration-300",
-                        isCompleted 
-                          ? "bg-primary border-primary text-primary-foreground" 
-                          : "border-muted-foreground/30 text-muted-foreground group-hover:border-primary group-hover:text-primary"
-                      )}>
-                        {isCompleted ? <CheckCircle2 className="h-5 w-5" /> : <span className="font-bold text-sm">{index + 1}</span>}
-                      </div>
-                    </div>
-                    <div className="pt-1">
-                      <p className={cn(
-                        "text-lg leading-relaxed transition-all duration-300",
-                        isCompleted ? "line-through text-muted-foreground" : "text-foreground"
-                      )}>
-                        {step}
-                      </p>
+        {/* Instructions Section */}
+        <div>
+          <h2 className="font-heading font-bold text-xl mb-4 flex items-center gap-2 px-2">
+            <span className="bg-primary/10 p-1.5 rounded-lg text-primary">
+              <Clock className="h-5 w-5" />
+            </span>
+            Instructions
+          </h2>
+          
+          <div className="space-y-4">
+            {recipe.instructions.map((step, index) => {
+              const isCompleted = completedSteps.includes(index);
+              return (
+                <div 
+                  key={index} 
+                  onClick={() => toggleStep(index)}
+                  className={cn(
+                    "flex gap-4 p-4 rounded-[1.5rem] cursor-pointer transition-all border border-transparent hover:border-border/60 hover:shadow-sm active:scale-[0.99]",
+                    isCompleted ? "bg-muted/30" : "bg-card border-border/30 shadow-sm"
+                  )}
+                >
+                  <div className="shrink-0">
+                    <div className={cn(
+                      "h-8 w-8 rounded-full flex items-center justify-center font-heading font-bold text-sm transition-all duration-300 shadow-sm",
+                      isCompleted 
+                        ? "bg-primary text-primary-foreground scale-110" 
+                        : "bg-secondary text-secondary-foreground"
+                    )}>
+                      {isCompleted ? <CheckCircle2 className="h-5 w-5" /> : index + 1}
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                  <div className="pt-0.5">
+                    <p className={cn(
+                      "text-sm sm:text-base leading-relaxed transition-all duration-300",
+                      isCompleted ? "text-muted-foreground line-through decoration-primary/30" : "text-foreground"
+                    )}>
+                      {step}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -49,18 +49,34 @@ export default function Recipes() {
     
     const matchesDifficulty = difficultyFilter === "all" || r.difficulty.toLowerCase() === difficultyFilter.toLowerCase();
     
-    // Mock category matching (random for demo purposes if not strictly defined in type)
-    // In a real app, recipe would have a 'category' field
-    const matchesCategory = activeCategory === "all" || 
-      (activeCategory === "vegetarian" && r.ingredients.some(i => i.toLowerCase().includes("vegetable"))) ||
-      r.title.toLowerCase().includes(activeCategory) || 
-      true; // Fallback to show all for demo since we don't have categories in data model yet
+    const matchesCategory = (() => {
+      if (activeCategory === "all") return true;
+      const lowerTitle = r.title.toLowerCase();
+      const lowerIngredients = r.ingredients.map(i => i.toLowerCase());
+      
+      switch (activeCategory) {
+        case "breakfast":
+          return lowerTitle.includes("toast") || lowerTitle.includes("egg") || lowerTitle.includes("parfait") || lowerTitle.includes("pancake") || lowerTitle.includes("oat");
+        case "lunch":
+          return lowerTitle.includes("salad") || lowerTitle.includes("sandwich") || lowerTitle.includes("wrap") || lowerTitle.includes("bowl") || lowerTitle.includes("soup");
+        case "dinner":
+          return lowerTitle.includes("pasta") || lowerTitle.includes("chicken") || lowerTitle.includes("steak") || lowerTitle.includes("stir-fry") || lowerTitle.includes("curry") || lowerTitle.includes("chili") || lowerTitle.includes("potatoes") || lowerTitle.includes("burger");
+        case "dessert":
+          return lowerTitle.includes("cookie") || lowerTitle.includes("cake") || lowerTitle.includes("pie") || lowerTitle.includes("sweet");
+        case "vegetarian":
+          // Exclude meat
+          const meatKeywords = ["chicken", "beef", "pork", "steak", "tuna", "salmon", "meat", "bacon", "ham"];
+          return !lowerIngredients.some(i => meatKeywords.some(meat => i.includes(meat))) && !lowerTitle.includes("chicken") && !lowerTitle.includes("beef");
+        default:
+          return true;
+      }
+    })();
 
     return matchesSearch && matchesDifficulty && matchesCategory;
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-20">
       <div className="flex flex-col gap-4">
         <div>
           <h1 className="font-heading font-bold text-2xl text-foreground mb-1">
@@ -72,16 +88,16 @@ export default function Recipes() {
         </div>
         
         {/* Category Pills */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4">
+        <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide -mx-4 px-4 snap-x">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
-                "flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300",
+                "snap-start flex items-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 border",
                 activeCategory === cat.id
-                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-105"
-                  : "bg-card border border-border/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                  ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25 scale-105"
+                  : "bg-card border-border/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground hover:border-border"
               )}
             >
               <span>{cat.emoji}</span>
